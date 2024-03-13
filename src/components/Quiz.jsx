@@ -10,7 +10,7 @@ export default function Quiz() {
   const [userAnswers, setUserAnswers] = useState([]);
   const activeQuestionIndex = userAnswers.length;
 
-  function handleSelect(selectedAnswer) {
+  function handleSelectAnswer(selectedAnswer) {
 
     setUserAnswers((prevstate) => {
       return [...prevstate, selectedAnswer]
