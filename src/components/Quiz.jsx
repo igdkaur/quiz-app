@@ -4,9 +4,9 @@
 // store those answers
 
 import { useState, useCallback } from "react";
-import quizCompleteImg from "../assets/quiz-complete.png";
 import Questions from "./Questions";
 import QUESTIONS from "../questions"
+import Summary from "./Summary";
 
 export default function Quiz() {
   const [userAnswers, setUserAnswers] = useState([]);
@@ -29,12 +29,7 @@ export default function Quiz() {
   );
 
   if (quizIsCompleted) {
-    return (
-      <div id="summary">
-        <img src={quizCompleteImg} alt="Trophy icon" />
-        <h2>Quiz Completed</h2>
-      </div>
-    );
+    return <Summary userAnswers={userAnswers} />
   }
 
 
