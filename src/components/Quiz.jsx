@@ -11,14 +11,28 @@ import { useCallback } from "react";
 
 export default function Quiz() {
   const [userAnswers, setUserAnswers] = useState([]);
+  const [answerState, setAnswerState] = useState('');
+
+
   const activeQuestionIndex = userAnswers.length;
   const quizIsCompleted = activeQuestionIndex === QUESTIONS.length;
 
 const handleSelectAnswer = useCallback(function handleSelectAnswer(selectedAnswer) {
+    setAnswerState('answered');
     setUserAnswers((prevstate) => {
       return [...prevstate, selectedAnswer];
     });
-  }, [])
+
+    setTimeout(() => {
+      if(selectedAnswer === QUESTIONS[activeQuestionIndex].answers[0]){
+        setAnswerState('correct');
+       } else {
+          setAnswerState('wrong');
+        }
+      }, 1000)
+
+  }, [activeQuestionIndex])
+  
 
   
   const handleSkipAnswer = useCallback(() => handleSelectAnswer(null),[handleSelectAnswer]);
@@ -38,7 +52,7 @@ const handleSelectAnswer = useCallback(function handleSelectAnswer(selectedAnswe
   return (
     <div id="quiz">
       <div id="question">
-        <QuestionTimer timeout={1000} onTimeout = {handleSkipAnswer} />
+        <QuestionTimer key={activeQuestionIndex} timeout={10000} onTimeout = {handleSkipAnswer} />
         <h2>{QUESTIONS[activeQuestionIndex].text}</h2>
         <ul id="answers">
           {shuffledAnswers.map((answer) => (
