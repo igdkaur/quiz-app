@@ -30,6 +30,7 @@ export default function Answers({answers, selectedAnswer, answerState, onSelect}
             <button
               onClick={() => onSelect(answer)}
               className={cssClass}
+              disabled={answerState !== ''}
             >
               {answer}
             </button>
@@ -39,10 +40,3 @@ export default function Answers({answers, selectedAnswer, answerState, onSelect}
     </ul>
   );
 }
-
-///
-// need list of answers
-// selected answers
-
-/// answersatte
-// pass avble naswers not shuffled
